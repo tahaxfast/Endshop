@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👾 End Shop | فروشگاه اند</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #0a0a1a;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.1), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1), transparent 40%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== Stars (سبک‌تر - فقط ۴۰ ستاره) ===== */
+  .stars-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 4s infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+  }
+
+  /* ===== Navbar ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(10, 10, 26, 0.9);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    padding: 12px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  nav .logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid rgba(168, 85, 247, 0.5);
+    background: #1a1a2e;
+    padding: 2px;
+  }
+  nav .logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ===== Hamburger Menu ===== */
+  .menu-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 201;
+    position: relative;
+  }
+  .menu-btn:hover {
+    background: rgba(168, 85, 247, 0.3);
+  }
+  .menu-btn span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.2s;
+  }
+  .menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-btn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ===== Dropdown Menu ===== */
+  .dropdown {
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    width: 260px;
+    background: rgba(15, 15, 35, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 18px;
+    padding: 15px;
+    z-index: 199;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.25s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  }
+  .dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dropdown .dd-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .dropdown .dd-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    border: 2px solid rgba(168, 85, 247, 0.5);
+    background: #1a1a2e;
+    object-fit: cover;
+  }
+  .dropdown .dd-header .dd-title {
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Orbitron', sans-serif;
+  }
+  .dropdown .dd-header .dd-sub {
+    font-size: 0.75rem;
+    color: #888;
+  }
+  .dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    margin-bottom: 4px;
+  }
+  .dropdown a:hover {
+    background: rgba(168, 85, 247, 0.2);
+    color: #fff;
+  }
+  .dropdown a .icon {
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+  }
+  .dropdown .dd-footer {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .dropdown .dd-footer a {
+    justify-content: center;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    font-weight: 700;
+  }
+  .dropdown .dd-footer a:hover {
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+  }
+
+  /* ===== Overlay ===== */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 198;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+  }
+  .overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ===== Floating Rubika Button ===== */
+  .float-tg {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 999;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+    transition: 0.2s;
+  }
+  .float-tg:hover {
+    transform: scale(1.08);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .logo-big {
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid rgba(168, 85, 247, 0.5);
+    background: #1a1a2e;
+    padding: 5px;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    color: #d8b4fe;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #a855f7, #ec4899, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+  }
+  .hero p {
+    color: #b8b8d0;
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+  }
+  .hero .cta {
+    display: inline-flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero .cta a {
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero .cta .primary {
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+  }
+  .hero .cta .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.5);
+  }
+  .hero .cta .secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  .hero .cta .secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ===== Discount Bar ===== */
+  .discount-bar {
+    background: linear-gradient(90deg, #ec4899, #a855f7, #3b82f6);
+    text-align: center;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== NEWS SECTION ===== */
+  .news-section {
+    max-width: 1200px;
+    margin: 50px auto 20px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .news-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 22px;
+    transition: 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .news-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #a855f7, #ec4899);
+  }
+  .news-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168, 85, 247, 0.4);
+  }
+  .news-card .news-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  .news-card .news-date {
+    font-size: 0.75rem;
+    color: #a855f7;
+    background: rgba(168, 85, 247, 0.15);
+    padding: 3px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .news-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .news-card p {
+    color: #aaa;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* ===== Section Titles ===== */
+  .section-title {
+    text-align: center;
+    margin: 60px 0 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .section-title h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .section-title span {
+    display: inline-block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    border-radius: 10px;
+  }
+  .section-title p {
+    color: #999;
+    margin-top: 10px;
+    font-size: 0.95rem;
+  }
+
+  /* ===== Products ===== */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.25s ease;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.2);
+  }
+  .card .img-box {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
+    position: relative;
+    overflow: hidden;
+  }
+  .card .img-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, rgba(10,10,26,0.6) 100%);
+  }
+  .card .img-box span {
+    animation: float 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .card .content { padding: 20px; }
+  .card .tag {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #f1f1f1;
+    font-weight: 700;
+  }
+  .card .price {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #4ade80;
+    margin-bottom: 15px;
+    display: block;
+  }
+  .card .price small {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 400;
+    margin-right: 5px;
+  }
+  .card .btn-buy {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    font-family: 'Vazirmatn', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    text-align: center;
+  }
+  .card .btn-buy:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+  }
+
+  /* ===== Featured ===== */
+  .featured {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .featured-box {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 25px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .featured-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 900;
+  }
+  .featured-text p {
+    color: #ccc;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .featured-text .btn-buy {
+    display: inline-block;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: 0.2s;
+  }
+  .featured-text .btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.5);
+  }
+  .featured-img {
+    font-size: 8rem;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* ===== Payment ===== */
+  .payment {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 25px;
+    padding: 35px;
+    max-width: 650px;
+    margin: 60px auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .payment h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #a855f7;
+  }
+  .card-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    direction: ltr;
+    background: #000;
+    padding: 18px;
+    border-radius: 15px;
+    color: #4ade80;
+    font-weight: 700;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 2px solid rgba(74, 222, 128, 0.3);
+  }
+  .card-number:hover {
+    border-color: #4ade80;
+  }
+  .payment .copy-msg {
+    color: #4ade80;
+    font-size: 0.9rem;
+    height: 20px;
+    transition: 0.2s;
+  }
+
+  /* ===== Reviews ===== */
+  .reviews {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .review {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 25px;
+    transition: 0.2s;
+    text-align: center;
+  }
+  .review:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-4px);
+  }
+  .review .stars {
+    color: #fbbf24;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+  }
+  .review p {
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .review .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .review .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+  .review .name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    direction: ltr;
+  }
+  .review .name a {
+    color: #a855f7;
+    text-decoration: none;
+  }
+  .review .name a:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== Contact ===== */
+  .contact {
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .contact h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  .contact p {
+    color: #ccc;
+    margin-bottom: 25px;
+  }
+  .contact a.main-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    padding: 15px 35px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    transition: 0.2s;
+    direction: ltr;
+  }
+  .contact a.main-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(236, 72, 153, 0.5);
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #888;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+  footer .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  footer .footer-logo img {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    background: #1a1a2e;
+    object-fit: cover;
+  }
+  footer .footer-logo span {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    nav { padding: 10px 15px; }
+    nav .logo img { width: 38px; height: 38px; }
+    nav .logo-text { font-size: 1.2rem; }
+    .dropdown { width: 240px; left: 10px; }
+    .hero { padding: 40px 20px 30px; }
+    .hero .logo-big { width: 90px; height: 90px; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    .featured-box { padding: 25px; }
+    .featured-text h3 { font-size: 1.4rem; }
+    .featured-img { font-size: 5rem; }
+    .card-number { font-size: 1rem; letter-spacing: 2px; }
+    .float-tg { width: 55px; height: 55px; font-size: 1.5rem; bottom: 20px; left: 20px; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.8rem; }
+    .section-title h2 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars-bg" id="stars"></div>
+
+  <!-- Overlay for menu -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="#hero" class="logo">
+      <img src="https://cdn.imgurl.ir/uploads/a38216_End_shop.png" alt="End Shop Logo" onerror="this.style.display='none'">
+      <span class="logo-text">End Shop</span>
+    </a>
+    <div class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Dropdown Menu -->
+  <div class="dropdown" id="dropdown">
+    <div class="dd-header">
+      <img src="https://cdn.imgurl.ir/uploads/a38216_End_shop.png" alt="Logo" onerror="this.style.display='none'">
+      <div>
+        <div class="dd-title">End Shop</div>
+        <div class="dd-sub">فروشگاه تخصصی ماینکرفت</div>
+      </div>
+    </div>
+    <a href="#hero" class="dd-link"><span class="icon">🏠</span> خانه</a>
+    <a href="#news" class="dd-link"><span class="icon">📰</span> اخبار</a>
+    <a href="#products" class="dd-link"><span class="icon">🛒</span> محصولات</a>
+    <a href="#featured" class="dd-link"><span class="icon">🎁</span> پیشنهاد ویژه</a>
+    <a href="#payment" class="dd-link"><span class="icon">💳</span> پرداخت</a>
+    <a href="#reviews" class="dd-link"><span class="icon">💬</span> نظرات</a>
+    <a href="#contact" class="dd-link"><span class="icon">📩</span> تماس</a>
+    <div class="dd-footer">
+      <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank"><span class="icon">🟣</span> گروه سفارش روبیکا</a>
+    </div>
+  </div>
+
+  <!-- Discount Bar -->
+  <div class="discount-bar">
+    🎉 تخفیف ویژه! با خرید بالای ۵۰ هزار تومان، ۱۰٪ تخفیف بگیرید 🎉
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <img src="https://cdn.imgurl.ir/uploads/a38216_End_shop.png" alt="End Shop" class="logo-big" onerror="this.style.display='none'">
+    <div class="badge">✨ فروشگاه تخصصی ماینکرفت ✨</div>
+    <h1>End Shop</h1>
+    <p>بهترین تامبنیل‌ها، آواتارها، اسکین‌ها و ادیت‌های ماینکرفت — با کیفیت بالا و قیمت مناسب! 🎮</p>
+    <div class="cta">
+      <a href="#products" class="primary">🛒 مشاهده محصولات</a>
+      <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="secondary">💬 سفارش در روبیکا</a>
+    </div>
+  </section>
+
+  <!-- ===== NEWS ===== -->
+  <div class="section-title" id="news">
+    <h2>📰 اخبار End Shop</h2>
+    <span></span>
+    <p>جدیدترین خبرها و تخفیف‌های فروشگاه</p>
+  </div>
+
+  <section class="news-section">
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-icon">🎉</div>
+        <span class="news-date">امروز</span>
+        <h3>افتتاح فروشگاه End Shop!</h3>
+        <p>فروشگاه ما رسماً شروع به کار کرد! برای جشن افتتاحیه، تمام محصولات تا آخر هفته ۱۰٪ تخفیف دارن. 🎊</p>
+      </div>
+
+      <div class="news-card">
+        <div class="news-icon">🔥</div>
+        <span class="news-date">۲ روز پیش</span>
+        <h3>تامبنیل سطح قوی — جدید!</h3>
+        <p>تامبنیل‌های سطح قوی با کیفیت فوق‌العاده به فروشگاه اضافه شدن. مناسب برای یوتیوبرها و استریمرها! 🎨</p>
+      </div>
+
+      <div class="news-card">
+        <div class="news-icon">🎁</div>
+        <span class="news-date">این هفته</span>
+        <h3>پکیج ویژه با ۵ هزار تخفیف</h3>
+        <p>با خرید پکیج کامل (تامبنیل قوی + ادیت ویدیو) فقط ۳۰ هزار تومان پرداخت کن و ۵ هزار تومان صرفه‌جویی کن! 🚀</p>
+      </div>
+
+      <div class="news-card">
+        <div class="news-icon">💠</div>
+        <span class="news-date">اخیر</span>
+        <h3>آواتار ماینکرفتی به روز شد</h3>
+        <p>حالا می‌تونی آواتار ماینکرفتی با هر سبک و ژستی که می‌خوای سفارش بدی! کیفیت بالاتر، تحویل سریع‌تر. 💜</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Products -->
+  <div class="section-title" id="products">
+    <h2>🎯 محصولات ما</h2>
+    <span></span>
+    <p>محصول مورد نظرت رو انتخاب کن</p>
+  </div>
+
+  <section class="products">
+
+    <div class="card">
+      <div class="img-box"><span>🖼️</span></div>
+      <div class="content">
+        <span class="tag">ماینکرفت</span>
+        <h3>تامبنیل سطح ضعیف</h3>
+        <span class="price"><small>تومان</small>۵,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>🎨</span></div>
+      <div class="content">
+        <span class="tag">محبوب</span>
+        <h3>تامبنیل سطح متوسط</h3>
+        <span class="price"><small>تومان</small>۱۰,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>🔥</span></div>
+      <div class="content">
+        <span class="tag">پیشرفته</span>
+        <h3>تامبنیل سطح قوی</h3>
+        <span class="price"><small>تومان</small>۱۵,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>💠</span></div>
+      <div class="content">
+        <span class="tag">آواتار</span>
+        <h3>آواتار ماینکرفتی (هر نوع)</h3>
+        <span class="price"><small>تومان</small>۱۰,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>✳️</span></div>
+      <div class="content">
+        <span class="tag">Java Edition</span>
+        <h3>ساخت توتم با اسکین شما</h3>
+        <span class="price"><small>تومان</small>۱۰,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>💥</span></div>
+      <div class="content">
+        <span class="tag">ادیت</span>
+        <h3>ادیت ویدیو</h3>
+        <span class="price"><small>تومان</small>۲۰,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="img-box"><span>🔸</span></div>
+      <div class="content">
+        <span class="tag">اسکین</span>
+        <h3>ساخت اسکین مورد نظر شما</h3>
+        <span class="price"><small>تومان</small>۱۰,۰۰۰</span>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🛒 خرید</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Featured -->
+  <section class="featured" id="featured">
+    <div class="featured-box">
+      <div class="featured-text">
+        <h3>🎁 پیشنهاد ویژه این هفته</h3>
+        <p>با خرید پکیج کامل (تامبنیل قوی + ادیت ویدیو) فقط ۳۰ هزار تومان پرداخت کنید و ۵ هزار تومان صرفه‌جویی کنید!</p>
+        <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="btn-buy">🚀 سفارش پکیج ویژه</a>
+      </div>
+      <div class="featured-img">🎮</div>
+    </div>
+  </section>
+
+  <!-- Payment -->
+  <section class="payment" id="payment">
+    <h2>🏧 پرداخت به شماره کارت</h2>
+    <p style="color:#aaa; margin-bottom:20px; font-size:0.95rem;">برای کپی کردن، روی شماره کارت کلیک کنید</p>
+    <div class="card-number" id="cardNumber">6219 8610 8508 6352</div>
+    <div class="copy-msg" id="copyMsg"></div>
+  </section>
+
+  <!-- Reviews -->
+  <div class="section-title" id="reviews">
+    <h2>💬 نظرات شما</h2>
+    <span></span>
+    <p>نظر خودت رو درباره End Shop بنویس!</p>
+  </div>
+
+  <section class="reviews">
+    <div class="review">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>"اگه از End Shop خرید کردی، نظرت رو برام بفرست تا اینجا نمایش داده بشه! 💜"</p>
+      <div class="user">
+        <div class="avatar">T</div>
+        <div class="name"><a href="https://www.rubika.ir/Taha_nistam_TU5" target="_blank">@Taha_nistam_TU5</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>📩 برای خرید پیام بدید</h2>
+    <p>سریع‌ترین راه ارتباطی، روبیکاست!</p>
+    <a href="https://www.rubika.ir/Taha_nistam_TU5" target="_blank" class="main-btn">💫 @Taha_nistam_TU5</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://cdn.imgurl.ir/uploads/a38216_End_shop.png" alt="End Shop" onerror="this.style.display='none'">
+      <span>End Shop</span>
+    </div>
+    <p>© 2025 End Shop — تمامی حقوق محفوظ است.</p>
+  </footer>
+
+  <!-- Floating Rubika Button -->
+  <a href="https://rubika.ir/joinc/FCJIAJAE0LGKISWXNBRKVVNPTEVNXPTU" target="_blank" class="float-tg" title="گروه سفارش روبیکا">🟣</a>
+
+  <script>
+    // Stars (سبک‌تر - فقط ۴۰ ستاره)
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 40; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      star.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // Copy Card
+    document.getElementById('cardNumber').addEventListener('click', function() {
+      const card = this.innerText.replace(/\s/g, '');
+      navigator.clipboard.writeText(card).then(() => {
+        const msg = document.getElementById('copyMsg');
+        msg.innerText = '✅ شماره کارت کپی شد!';
+        setTimeout(() => msg.innerText = '', 2000);
+      });
+    });
+
+    // Hamburger Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const dropdown = document.getElementById('dropdown');
+    const overlay = document.getElementById('overlay');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuBtn.classList.toggle('active');
+      dropdown.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+
+    overlay.addEventListener('click', () => {
+      menuBtn.classList.remove('active');
+      dropdown.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.dd-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuBtn.classList.remove('active');
+        dropdown.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
